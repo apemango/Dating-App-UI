@@ -8,7 +8,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -20,6 +19,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.datingapp.Screens
+import com.example.datingapp.screens.CallScreen
+import com.example.datingapp.screens.ChatConversation
 import com.example.datingapp.screens.ChatScreen
 import com.example.datingapp.screens.HomeScreen
 import com.example.datingapp.screens.ProfileScreen
@@ -82,17 +83,29 @@ fun BottomNavigationBar() {
                     navController
                 )
             }
+            composable(Screens.Profile.route) {
+                ProfileScreen(
+                    navController
+                )
+            }
+
             composable(Screens.Chat.route) {
                 ChatScreen(
                     navController
                 )
             }
 
-            composable(Screens.Profile.route) {
-                ProfileScreen(
+            composable(Screens.ChatConversation.route) {
+                ChatConversation(
                     navController
                 )
             }
+            composable(Screens.Call.route) {
+                CallScreen(
+                    navController
+                )
+            }
+
         }
     }
 }

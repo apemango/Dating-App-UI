@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.datingapp.R
+import com.example.datingapp.Screens
 import com.example.datingapp.ui.theme.DatingAppTheme
 import com.example.datingapp.ui.theme.Purple40
 
@@ -73,7 +74,9 @@ fun ChatScreen(navController: NavController) {
 
                 LazyColumn {
                     items(users.size) { index ->
-                        ChatUserItem(user = users[index])
+                        ChatUserItem(user = users[index]) {
+                            navController.navigate(Screens.ChatConversation.route)
+                        }
                     }
                 }
             }
@@ -82,9 +85,10 @@ fun ChatScreen(navController: NavController) {
 }
 
 @Composable
-fun ChatUserItem(user: UserModel) {
+fun ChatUserItem(user: UserModel, click: () -> Unit) {
     Row(
         modifier = Modifier
+            .clickable { click.invoke() }
             .fillMaxWidth()
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -168,12 +172,14 @@ fun ChatTopAppBarWithTabs(
         Spacer(modifier = Modifier.weight(1f))
         Image(
             painter = painterResource(R.drawable.multiple_contact), contentDescription = "",
-            modifier = Modifier.padding(end = 10.dp)
+            modifier = Modifier
+                .padding(end = 10.dp)
                 .size(18.dp), contentScale = ContentScale.FillBounds
         )
         Image(
             painter = painterResource(R.drawable.three_dots_menu), contentDescription = "",
-            modifier = Modifier.padding(end = 10.dp)
+            modifier = Modifier
+                .padding(end = 10.dp)
                 .size(18.dp), contentScale = ContentScale.FillBounds
         )
     }
